@@ -19,26 +19,48 @@ class News
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $tittle;
+    private $title;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
 
     /**
      * @ORM\Column(type="integer")
      */
     private $toshow;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Category", cascade={"persist", "remove"})
+     */
+    private $category;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTittle(): ?string
+    public function getTitle(): ?string
     {
-        return $this->tittle;
+        return $this->title;
     }
 
-    public function setTittle(string $tittle): self
+    public function setTitle(string $title): self
     {
-        $this->tittle = $tittle;
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
@@ -51,6 +73,18 @@ class News
     public function setToshow(int $toshow): self
     {
         $this->toshow = $toshow;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
