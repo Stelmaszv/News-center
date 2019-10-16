@@ -32,7 +32,7 @@ class News
     private $toshow;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Category", cascade={"persist", "remove"})
+     * @ORM\Column(type="string", length=255)
      */
     private $category;
 
@@ -77,12 +77,12 @@ class News
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getCategory(): ?string
     {
         return $this->category;
     }
 
-    public function setCategory(?Category $category): self
+    public function setCategory(string $category): self
     {
         $this->category = $category;
 

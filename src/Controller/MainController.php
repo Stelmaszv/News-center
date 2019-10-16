@@ -1,6 +1,6 @@
 <?php
 namespace App\Controller;
-use App\Entity\News;
+use App\Repository\NewsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,23 +9,50 @@ class MainController extends AbstractController{
     /**
      * @Route("/", name="main")
      */
-    public function index(){
-        
+    public function index(NewsRepository $NewsRepository){
+        $array=$NewsRepository->getNews();
         return $this->render('main/index.html.twig', [
-            'controller_name' => 'kotek',
+            'sports'            =>$array['sport'],
+            'entertainments'    =>$array['entertainment'],
+            'fashions'           =>$array['fashion'],
+            'automotives'        =>$array['automotive']
         ]);
+        
     }
-    /**
+
+     /**
      * @Route("/create", name="create")
      */
+    /*
+    public function getNews(){
+        $array=$this->findAll();
+        $items=array(
+            '1'=>array(),
+        );
+        foreach($array as $item){
+            array_push($item->getCategory(),$item);
+        }
+        return $items;
+    }
+    */
     public function create(){
         $news = new News();
-        $news->setTittle('fqef');
+        $Category =new Category();
+        $news->setTitle('fqef');
+        $Category->setName('jgj');
+        $news->setDescription('new des');
+        $news->setCategory($Category);
         $news->setToshow(0);
         $em= $this->getDoctrine()->getManager();
         $em->persist($news);
         $em->flush();
         return new Response('post was created');
 
+    }
+    private function getContent($array,$section):object{
+        return $this->render('main/section.html.twig',[
+            'sectioname'=>$section,
+            'data'=>$array
+        ]);
     }
 }
