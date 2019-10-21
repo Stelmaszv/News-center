@@ -1,16 +1,23 @@
 <h2>Sport</h2>
-{% for sport in sports %}
-    <a href="{{path('news',{id:sport.id})}}">{{sport.title}}</a><br>
-{% endfor %}
-<h2>Entertainment</h2>
-{% for entertainment in entertainments %}
-    <a href="{{path('news',{id:entertainment.id})}}">{{entertainment.title}}</a><br>
-{% endfor %}
+<table>
+    {% for el in sport %}
+    <tr>
+        <td>{{el.title}}</td>
+        <td><a href="{{path('show',{id:el.id})}}">show</a></td>
+        <td><a href="{{path('delete',{id:el.id})}}">delete</a></td>
+        <td><a href="{{path('edit',{id:el.id})}}">edit</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
 <h2>Fashions</h2>
-{% for fashions in fashions %}
-    <a href="{{path('news',{id:fashions.id})}}">{{fashions.title}}</a><br>
-{% endfor %}
-<h2>Automotives</h2>
-{% for automotive in automotives %}
-    <a href="{{path('news',{id:automotive.id})}}">{{automotive.title}}</a><br>
-{% endfor %}
+<table>
+    {% for el in fasion %}
+    <tr>
+        <td>{{el.title}}</td>
+        <td><a href="{{path('show',{id:el.id})}}">show</a></td>
+        <td><a href="{{path('delete',{id:el.id})}}">delete</a></td>
+        <td><a href="{{path('edit',{id:el.id})}}">edit</a></td>
+    </tr>
+    {% endfor %}
+</table>

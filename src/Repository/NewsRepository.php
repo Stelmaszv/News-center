@@ -14,21 +14,10 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class NewsRepository extends ServiceEntityRepository
 {
+    public $news=[];
     public function __construct(ManagerRegistry $registry){
         parent::__construct($registry, News::class);
-    }
-    public function getNews(){
-        $array=$this->findAll();
-        $items=array(
-            'sport'          =>array(),
-            'entertainment'  =>array(),
-            'fashion'        =>array(),
-            'automotive'     =>array(),
-        );
-        foreach($array as $item){
-            array_push($items[$item->getCategory()],$item);
-        }
-        return $items;
+        $this->news=$this->findAll();
     }
 
     // /**

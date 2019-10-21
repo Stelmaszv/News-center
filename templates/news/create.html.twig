@@ -1,0 +1,7 @@
+{{ form_start(form) }}
+    <ul>
+       {% for el in form.category %}
+            <li>{{ form_row(el.name) }}</li>
+        {% endfor %}
+    </ul>
+{{ form_end(form) }}

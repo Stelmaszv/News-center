@@ -32,7 +32,7 @@ class News
     private $toshow;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="news")
      */
     private $category;
 
@@ -77,12 +77,12 @@ class News
         return $this;
     }
 
-    public function getCategory(): ?string
+    public function getCategory(): ?category
     {
         return $this->category;
     }
 
-    public function setCategory(string $category): self
+    public function setCategory(?category $category): self
     {
         $this->category = $category;
 

@@ -1,23 +1,21 @@
 <?php
 namespace App\Controller;
 use App\Repository\NewsRepository;
+use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+
 
 class MainController extends AbstractController{
     /**
      * @Route("/", name="main")
      */
-    public function index(NewsRepository $NewsRepository){
-        $array=$NewsRepository->getNews();
-        return $this->render('main/index.html.twig', [
-            'sports'            =>$array['sport'],
-            'entertainments'    =>$array['entertainment'],
-            'fashions'           =>$array['fashion'],
-            'automotives'        =>$array['automotive']
+    public function index(NewsRepository $NewsRepository,CategoryRepository $CategoryRepository){
+        return $this->render('main/index.html.twig',[
+            'sport'=>$CategoryRepository->getCategory('sport',$NewsRepository),
+            'fasion'=>$CategoryRepository->getCategory('fasion',$NewsRepository),
         ]);
-        
     }
 
      /**
